@@ -1,0 +1,31 @@
+A callback is a piece of executable code that is passed as 
+an argument to other code, which is expected to call back
+(execute) the argument at some convenient time.
+Nói một cách dễ hiểu, callback tức là ta truyền một đoạn code (Hàm A) này vào một đoạn code khác (Hàm B). Tới một thời điểm nào đó, Hàm A sẽ được hàm B gọi lại (callback).
+
+function tangQua(qua) {
+   return console.log("Đã tặng " + qua);  
+}
+function oNha(vo, tangQua) {
+   var qua = "Quà đã nhận";
+   tangQua(qua);  
+}
+Hàm B ở đây là việc vợ bạn ở nhà. Ta truyền hàm A vào như 1 argument cho hàm B, tại 1 thời điểm nào đó, hàm B sẽ gọi hàm A (Tức là vợ bạn mang quà qua cho em hàng xóm).
+// asynchronous function // npm install request (request module)
+function getList(idList, cb){ // cb call back
+    request('http://app.nhodalat.com/sp_by_type.php?id_type='+idList, function(err,response,body){
+        cb(body);
+    });
+}
+// call function
+getList(4, function(data){
+	console.log(data);
+});
+
+'use strict'
+Để hiểu rõ đoạn code này, chúng ta sử dụng strict mode bằng cách khai báo 'use strict' bên trong thân hàm. Nếu strict mode được bật, đoạn code sẽ văng lỗi Uncaught ReferenceError: b is not defined. Strict mode sẽ yêu cầu bạn khai báo tường minh mọi thứ, vì thế đoạn code sẽ đươc viết lại như sau.
+
+(function() {
+   'use strict';
+   var a = window.b = 5;
+})();

@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "eslint-config-rallycoding": "^3.2.0"
+  },
+  "name": "ExampleAsync",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

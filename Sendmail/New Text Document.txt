@@ -1,0 +1,10 @@
+1. Tao mot tai khoan gmail
+2. config
+Settings -> Forwarding and POP/IMAP
+	Enable POP for all mail
+	Enable IMAP
+Save Changes
+//
+turn off: allowing access to less secure apps
+//
+search google: node mailer

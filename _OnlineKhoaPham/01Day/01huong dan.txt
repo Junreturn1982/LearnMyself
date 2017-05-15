@@ -1,0 +1,28 @@
+https://socket.io/docs/
+1. socketio realtime: truyen tai du lieu realtime
+2 demo: chat, live đá banh (xem ty so tran dau)
+_làm trang web, server (nodejs) tai du lieu cho nguoi dung
+_cài socketio trên nodejs
+
+yarn add express ejs socket.io
+jquery tren trang ejs
+
+2. server nodejs: listen event for client
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+server.listen(3000, () => console.log('Server started'));
+// co ket noi tao ra idKetNoi // io.on: lang nghe trong socket
+io.on('connection', (socket) => {
+    console.log('ket noi' + socket.id);
+});
+3. file ejs
+<script src="jquery3.2.1.min.js"></script>
+<script src="socket.io/socket.io.js"></script>
+	 <script>
+    var socket = io("http://localhost:3000");
+
+    $(document).ready(function(){
+        // alert('');
+    });
+    </script>

@@ -1,0 +1,9 @@
+_ async await su dung thu vien babel cli(command line interface): npm install --save-dev babel-cli
+file index.js: import fs from 'fs'; // npm start
+file package.json (script): "start": "babel-node index.js" 
+cmd: yarn add babel-preset-es2015 babel-preset-2017
+cmd: babel-node index.js
+2. tao file .babelrc
+{
+    "presets": ["es2015", "es2017"]
+}

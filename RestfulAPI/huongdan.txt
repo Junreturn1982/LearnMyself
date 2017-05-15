@@ -1,0 +1,8 @@
+1. npm init 
+2. npm install express
+3. npm install body-parser (post method) 
+// template engine: ejs, ect, underscore.js, jade
+4. npm install ejs
+5. npm install request // Retrieving JSON data from web services
+/*=== ("unused") ===*/
+6. npm install q // q module use deferred/promise in nodejs

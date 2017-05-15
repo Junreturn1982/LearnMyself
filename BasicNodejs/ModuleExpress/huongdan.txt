@@ -1,0 +1,21 @@
+module express: assist to do web server : truy cập file, get data faster
+1. Tạo môt folder ServerExpress
+2. Tạo một file package.json (download and install express module) 
+{
+	"name" : "ServerExpress",
+	"version" : "0.0.1",
+	"private" : "true",
+	"dependencies" : {
+		"express" : "*"
+	}
+}
+3. Right click ServerExpress(Git Bash Here) -> npm install (read package.json)
+4. Create app.js
+var express = require("express");
+var app = express();
+var server = require("http").createServer(app); 
+server.listen(3000,"127.0.0.1");
+
+app.get("/", function(req, res){
+	res.send("<font color=red>HELLO WORLD</font>");
+});

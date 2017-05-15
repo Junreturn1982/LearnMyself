@@ -1,0 +1,10 @@
+yarn add express ejs express cheerio
+
+// each
+const $ = cheerio.load(body);
+let ds = $(body).find('a.txt_link');
+console.log(ds[0]['attribs']['title']);
+ds.each((i, e) => {
+	console.log($(this).text());
+	console.log(e['attribs']['href']);
+});

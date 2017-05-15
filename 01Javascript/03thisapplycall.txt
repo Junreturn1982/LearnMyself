@@ -1,0 +1,174 @@
+Trước đây, mình đã đề cập tới một khái niệm khá khó nhằn trong javascript là callback. Ở bài viết này, mình sẽ giải thích về cái đít, nhầm, cái this – một từ khóa dễ làm đau đầu các lập trình viên js. Ảnh trong bài viết chỉ có tính chất minh họa, các bạn chăm chú đọc bài chứ đừng ngắm mông với đít nhé ;).
+
+2w54jeu
+
+
+Từ khi đít (this) nhỏ còn hiền lành vô hại
+
+Khi mới học, ta thấy this cũng khá đơn giản và vô hại. Nếu bạn từng học Java hoặc C#, hẳn bạn cũng nhớ từ khóa this dùng để trỏ tới chính object gọi hàm đó. Trong javascript, từ khóa this cũng đóng vai trò tương tự. Ở dòng code dưới, ta sẽ thấy this trở tới object person, in ra đúng những điều ta muốn.
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  showName: function() {
+    console.log(this.firstName + ' ' + this.lastName);
+  }
+};
+
+//Ở đây this sẽ là object person
+person.showName(); //Hoang Pham.
+view rawthisSample.js hosted with ❤ by GitHub
+Một trường hợp khác, khi ta khai báo biến global và hàm global, toàn bộ các biến và hàm đó sẽ nằm trong một object có tên là window. Lúc này, khi ta gọi hàm showName, chính object window là object gọi hàm đó, this trỏ tới chính object window.
+
+var firstName = 'Hoang', lastName = 'Pham';
+// 2 biến này nằm trong object window
+
+function showName()
+{
+  console.log(this.firstName + ' '+ this.lastName);
+}
+
+window.showName(); // Hoang Pham. this trỏ tới object window
+showName(); //Hoang Pham. Object gọi hàm showName vẫn là object window
+view rawthisGlobalSample.js hosted with ❤ by GitHub
+Tới khi đít lớn và gây bao rắc rối
+
+Nếu chỉ sử dụng theo 2 cách nêu trên, this khá dễ hiểu vào không gây ra mấy khó khăn khi sử dụng. Song, sự đáng sợ và khó chịu của this sẽ dần lộ ra qua các ví dụ dưới đây. Các bạn vui lòng tiếp tục chăm chú đọc bài chứ đừng ngắm mông với đít nhé ;).
+
+girls in yoga pants 15_thumb
+
+Rắc rối 1 – Hàm được truyền vào như một callback
+
+Giả sử, ta muốn khi người dùng click vào một button, ta sẽ gọi hàm showName của user. Vô cùng đơn giản, ta chỉ cần truyền hàm showName vào như một callback cho hàm click là xong.
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  showName: function() {
+    console.log(this.firstName + ' ' + this.lastName);
+  }
+};
+
+//Ở đây this sẽ là object person
+person.showName(); //Hoang Pham.
+
+$('button').click(person.showName); //showName truyền vào như callback
+view rawthisSampleCallback.js hosted with ❤ by GitHub
+Tuy nhiên, hàm lại không chạy như ta mong muốn. Mở developer tools lên thì thấy object this không có trường firstName và lastName. Kiểm tra kĩ chút nữa thì ta thấy this ở đây là chính button ta đã click vào, chứ không còn là object person như ví dụ trên nữa.
+
+Trong trường hợp này, ta có thể sửa lỗi bằng cách sử dụng anonymous function (nghĩa là function() có chứa function()_declare not callback), hoặc dùng hàm bind để xác định tham số this cho hàm truyền vào là được.
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  showName: function() {
+    console.log(this.firstName + ' ' + this.lastName);
+  }
+};
+
+$('button').click(person.showName); //showName truyền vào như callback, ở đây this chính là button
+
+// Dùng anonymous function
+$('button').click(function(){ person.showName() });
+
+// Dùng bind
+$('button').click(person.showName.bind(person)); //this ở đây vẫn là object person
+view rawthisSampleCallbackFixed.js hosted with ❤ by GitHub
+Rắc rối 2 – Sử dụng this trong anonymous function
+
+Giả sử, object person có một danh sách bạn bè, bạn muốn viết một function show toàn bộ bạn bè của person đó. Theo lý thuyết, ta sẽ viết như sau:
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  friends : ['Minh', 'Sang', 'Khoa', 'Hoang'],
+  showFriend: function() {
+    for(var i = 0; i < this.friends.length; i++) 
+      console.log(this.firstName + ' have a friend named ' + this.friends[i]);
+  },
+  showFriendThis: function() {
+    this.friends.forEach(function(fr){
+      console.log(this.firstName + ' have a friend named ' + fr);
+    });
+  }
+};
+
+person.showFriend(); //Hàm chạy đúng
+
+person.showFriendThis(); // Hàm chạy sai
+view rawthisAnonymousSample.js hosted with ❤ by GitHub
+Với hàm showFriend, khi ta dùng hàm for thường, hàm chạy đúng như mong muốn. Tuy nhiên, trong trường hợp dưới, khi ta dùng hàm forEach (xem lại ở đây), truyền vào một anonymous function, this ở đây lại thành object window, do đó trường firstName bị underfined.
+
+Trong trường hợp này, cách giải quyết ta thường dùng là tạo một biến để gán giá trị this vào, và truy xuất tới giá trị đó trong anonymous function.
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  friends : ['Minh', 'Sang', 'Khoa', 'Hoang'],
+  showFriendFixed: function() {
+    var personObj = this; //Gán giá trị this vào biến personObj
+    this.friends.forEach(function(fr){
+      console.log(personObj.firstName + ' have a friend named ' + fr);
+    });
+  }
+};
+
+person.showFriendFixed(); //Hàm chạy đúng
+view rawthisAnonymousSampleFixed.js hosted with ❤ by GitHub
+Rắc rối 3 – Khi hàm được gán vào một biến
+
+Trường hợp này ít xảy ra, nhưng mình cũng liệt kệ cho đủ bộ. Đó là trường hợp khi ta gán một hàm vào một biến, sau đó gọi hàm đó. Hàm sẽ không chạy như ta mong muốn, vì object gọi hàm lúc này chính là object window.
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  showName: function() {
+    console.log(this.firstName + ' ' + this.lastName);
+  }
+};
+
+//Ở đây this sẽ là object person, chạy đúng
+person.showName(); //Hoang Pham.
+
+var showNameFunc = person.showName; //Gán function vào biến showNameFunc
+showNameFunc(); //Chạy sai, ở đây this sẽ là object window
+view rawthisVariable.js hosted with ❤ by GitHub
+Để giải quyết, ta cũng sử dụng hàm bind như trường hợp trên cùng, quá đơn giản phải không nào?
+
+var person = {
+  firstName: 'Hoang',
+  lastName: 'Pham',
+  showName: function() {
+    console.log(this.firstName + ' ' + this.lastName);
+  }
+};
+
+var showNameFunc = person.showName.bind(person); //Gán function vào biến showNameFunc
+showNameFunc(); //Chạy đúng vì this bây giờ là object person, do ta đã bind
+view rawthisVariableFixed.js hosted with ❤ by GitHub
+Trong bài viết, mình đã sử dụng hàm bind để giải quyết một số vấn đề với từ khóa this. Thật ra, liên quan tới cái đít (this) không chỉ có bind mà còn có 2 mĩ nữ khác cũng phức tạp không kém là apply và call. Ở một số bài viết tiếp theo, mình sẽ cùng các bạn lột đồ, lộn, vạch trần sự phức tạp của 3 hàm này. Nhớ đón xem nhé, ở các bài viết sau không có mông cũng chả có đít nữa đâu.
+
+javascript-guy
+
+var name = 'Hoang';
+var obj = {
+   name: 'Alibaba',
+   prop: {
+      name: 'Aladin',
+      getName: function() {
+         return this.name;
+      }
+   }
+};
+
+console.log(obj.prop.getName());
+
+var test = obj.prop.getName;
+
+console.log(test());
+
+output: Aladin Hoang
+
+Khi hàm getName() được gán cho biến test lúc này đang là một thuộc tính có scope global, thì kết quả trả về sẽ là window.name, cái mà đã được gán ở dòng đầu tiên.
+
+Bài viết có tham khảo từ nguồn: http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/. Đây là một trang web khá hay về javascript, mình ôn lại được khá nhiều kiến thức js bị hổng trong này.
