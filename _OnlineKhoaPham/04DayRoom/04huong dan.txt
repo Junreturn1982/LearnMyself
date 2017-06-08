@@ -1,0 +1,51 @@
+https://socket.io/docs/
+1. socketio realtime: truyen tai du lieu realtime
+2 demo: chat, live đá banh (xem ty so tran dau)
+_làm trang web, server (nodejs) tai du lieu cho nguoi dung
+_cài socketio trên nodejs
+
+yarn add express ejs socket.io
+jquery tren trang ejs
+
+2. server nodejs: listen event for client
+/*================ day 02 ==========*/
+3. user: emit: phat tin hieu, on: lang nghe
+userA emit (Client-send-data)-> socket nhan -> (Server-send-data)(3TH) userB on 
+_TH1: io.sockets.emit (trả tất cả)
+_TH2: socket.emit (tra ve nguoi gui)
+_TH3: socket.broadcast.emit (tra nhung nguoi cùng socket)
+
+chat rieng: userA và userB: io.to("socketid").emit()
+*io: input, output
+*socket: connect create socket
+*json web token: giu lai socket user
+* note: ve hinh va lam theo tung buoc nho -> de hieu
+Bai tap: nhap 2 so gui di -> nguoi con lai nhận kết quả
+Bai tap: 3 nút (do, xanh, vang) -> tat cac socket doi màu
+/*================ day 03 ==========*/
+* Dang ky
+1. client-send-Username
+2. server-send-register-thatbai
+3. server-send-register-thanhcong
+4. server-send-danhsach-Users
+* Log out
+1. logout
+2. co-nguoi-logout
+* send message
+1. user-send-message
+2. server-send-message
+
+/*================ day 04 ==========*/
+web rtc: cho chat video, (note: xác thực pass port)
+* namespace: nhom admin chat voi nhau, nhom guest chat voi nhau,...
+* room: gom nhóm các socket lại. khi socket tạo ra -> room tạo ra theo id
+1. Tạo room: join room (chưa có room sẽ tạo mới, có rồi sẽ join room), leave room 
+(khi ko co idsocket sẽ hủy room)
+2. mỗi lần user click sẽ biến cờ(on/off) có thời gian để tránh spam
+3. Host server: vps, heroku, aws, dificultocean, window azure
+4. Khi deploy:
+_báo cho server biết chạy file js nào (index.js) -> create file: Procfile
+web: node index.js
+_listen là localhost: 3000 -> server.listen(process.env.PORT || 3000)
+_xuly.js -> var socket = io("https://domain.herokuapp.com");
+_file.ejs -> <script src="https://domain.herokuapp.com/socket.io/socket.io.js"></script>

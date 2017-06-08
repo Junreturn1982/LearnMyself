@@ -1,0 +1,9 @@
+body{background-color: #ebeef4}
+#wrapper{width: 80%; margin: auto}
+
+#information{border: solid 1px black; margin: 10px; padding: 10px; text-align: center;}
+
+#listUsers{ text-align: center;}
+
+.hocvien{border-bottom: solid 1px whitesmoke; padding: 5px;}
+.hang1 span{color: blue; font-weight: bold;}

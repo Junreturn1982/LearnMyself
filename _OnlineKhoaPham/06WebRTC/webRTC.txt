@@ -1,0 +1,4 @@
+https://webrtc.org/
+https://www.html5rocks.com/en/tutorials/webrtc/basics/
+https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+https://github.com/feross/simple-peer

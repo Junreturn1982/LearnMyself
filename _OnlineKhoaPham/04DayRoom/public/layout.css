@@ -1,0 +1,5 @@
+body{background-color: #ebeef4}
+#left{width:20%; float: left; border: solid 1px black;}
+#right{width:79%; float: right; }
+
+#roomCurrent{ background-color: grey; width: 100px; float: right; color: white;}

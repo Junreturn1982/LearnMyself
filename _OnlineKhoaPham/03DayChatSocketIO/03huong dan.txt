@@ -1,0 +1,36 @@
+https://socket.io/docs/
+1. socketio realtime: truyen tai du lieu realtime
+2 demo: chat, live đá banh (xem ty so tran dau)
+_làm trang web, server (nodejs) tai du lieu cho nguoi dung
+_cài socketio trên nodejs
+
+yarn add express ejs socket.io
+jquery tren trang ejs
+
+2. server nodejs: listen event for client
+/*================ day 02 ==========*/
+3. user: emit: phat tin hieu, on: lang nghe
+userA emit (Client-send-data)-> socket nhan -> (Server-send-data)(3TH) userB on 
+_TH1: io.sockets.emit (trả tất cả)
+_TH2: socket.emit (tra ve nguoi gui)
+_TH3: socket.broadcast.emit (tra nhung nguoi cùng socket)
+
+chat rieng: userA và userB: io.to("socketid").emit()
+*io: input, output
+*socket: connect create socket
+*json web token: giu lai socket user
+* note: ve hinh va lam theo tung buoc nho -> de hieu
+Bai tap: nhap 2 so gui di -> nguoi con lai nhận kết quả
+Bai tap: 3 nút (do, xanh, vang) -> tat cac socket doi màu
+/*================ day 03 ==========*/
+* Dang ky
+1. client-send-Username
+2. server-send-register-thatbai
+3. server-send-register-thanhcong
+4. server-send-danhsach-Users
+* Log out
+1. logout
+2. co-nguoi-logout
+* send message
+1. user-send-message
+2. server-send-message
