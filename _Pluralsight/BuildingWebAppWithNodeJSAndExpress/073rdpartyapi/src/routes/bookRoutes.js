@@ -4,7 +4,8 @@ const books = require('../../data/books');
 const bookRouter = express.Router();
 
 const router = function (nav) {
-    let bookController = require('../controllers/bookController')(null, nav);
+    let bookService = require('../services/goodreadsService')();
+    let bookController = require('../controllers/bookController')(bookService, nav);
     bookRouter.use(bookController.middleware);
     bookRouter.route('/')
         .get(bookController.getIndex);

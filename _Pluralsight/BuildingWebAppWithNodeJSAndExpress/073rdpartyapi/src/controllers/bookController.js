@@ -3,9 +3,9 @@ const objectId = require('mongodb').ObjectID;
 
 const bookController = function(bookService, nav) {
     let middleware = (req, res, next) => {
-        if (!req.user) {
-            return res.redirect('/');
-        }
+        // if (!req.user) {
+        //     return res.redirect('/');
+        // }
         next();
     };
     let getIndex = (req, res) => {
@@ -25,7 +25,11 @@ const bookController = function(bookService, nav) {
             mongodb.connect(url, (err, db) => {
                 let collection = db.collection('books');
                 collection.findOne({_id: id}, (err, results) => {
-                        res.render('bookView', { title: 'Books', nav: nav, book: results
+                        bookService.getBookById(results.bookId, (err, book) => {
+                            results.book = book;
+                            res.render('bookView', { title: 'Books', nav: nav, 
+                            book: results
+                        });
                     });
                 });
             });
