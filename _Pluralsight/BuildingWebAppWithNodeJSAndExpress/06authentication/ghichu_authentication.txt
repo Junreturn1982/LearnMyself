@@ -5,3 +5,5 @@ passport
 express-session
 passport-local
 
+// https://stackoverflow.com/questions/41585947/passport-unknown-authentication-strategy-local
+

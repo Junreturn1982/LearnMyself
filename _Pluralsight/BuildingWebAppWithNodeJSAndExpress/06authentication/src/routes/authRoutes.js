@@ -28,8 +28,14 @@ const router = (val) => {
         });
         
     });
+   
     authRouter.route('/signIn')
-    .post(passport.authenticate('local'));
+    .post(passport.authenticate('local', {
+        failureRedirect: '/'
+    }),(req, res) => {
+        res.redirect('/auth/profile');
+    });
+    
     authRouter.route('/profile')
     .get((req, res) => {
         res.json(req.user);
