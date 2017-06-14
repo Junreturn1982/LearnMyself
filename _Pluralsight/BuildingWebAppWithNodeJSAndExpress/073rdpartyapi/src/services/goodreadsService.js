@@ -7,7 +7,7 @@ const goodreadsService = function () {
     let getBookById = (id, cb) => {
         let options = {
             host: 'www.goodreads.com',
-            path: '/book/show/656.xml?key=ucd8Ov2Te2rCOBhTabFhw'
+            path: '/book/show/'+id+'.xml?key=ucd8Ov2Te2rCOBhTabFhw'
         };
         let callback = (response) => {
             let str = '';

@@ -9,6 +9,7 @@ Cách khắc phục đơn giản là dùng return sau mỗi hàm res.send hoặc
 https://www.goodreads.com/api
 https://www.goodreads.com/api/index#book.show
 // URL: https://www.goodreads.com/book/show.FORMAT    (sample url) 
+https://www.goodreads.com/book/show/4028
 https://www.goodreads.com/api/keys
 Api Key
 

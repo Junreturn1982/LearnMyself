@@ -25,12 +25,18 @@ const bookController = function(bookService, nav) {
             mongodb.connect(url, (err, db) => {
                 let collection = db.collection('books');
                 collection.findOne({_id: id}, (err, results) => {
-                        bookService.getBookById(results.bookId, (err, book) => {
-                            results.book = book;
+                        if (results.bookId) {
+                            bookService.getBookById(results.bookId, (err, book) => {
+                                results.book = book;
+                                res.render('bookView', { title: 'Books', nav: nav, 
+                                book: results
+                                });
+                            });
+                        } else {
                             res.render('bookView', { title: 'Books', nav: nav, 
-                            book: results
-                        });
-                    });
+                                book: results
+                            });
+                        }
                 });
             });
         };
