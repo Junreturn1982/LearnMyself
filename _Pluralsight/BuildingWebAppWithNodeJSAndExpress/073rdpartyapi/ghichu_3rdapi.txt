@@ -4,6 +4,7 @@
 Lỗi này thường là do xử lý bất đồng bộ (asynchronous) không đúng dẫn đến tình trạng response.send({}) (hoặc cái nào tương tự thế) bị gọi 2 lần.
 Cách khắc phục đơn giản là dùng return sau mỗi hàm res.send hoặc res.json...
 
+// npm install --save xml2js http
 // https://www.goodreads.com/
 https://www.goodreads.com/api
 https://www.goodreads.com/api/index#book.show
