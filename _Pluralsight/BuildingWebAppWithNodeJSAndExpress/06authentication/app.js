@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
     secret: 'library',
+    cookie: { maxAge : 10000 }, //1 Hour = 3600000
     proxy: true,
     resave: true,
     saveUninitialized: true
