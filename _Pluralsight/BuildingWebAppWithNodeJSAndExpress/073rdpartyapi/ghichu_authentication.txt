@@ -1,0 +1,13 @@
+* modules:
+body-parser
+cookie-parser
+passport
+express-session
+passport-local
+
+// https://stackoverflow.com/questions/41585947/passport-unknown-authentication-strategy-local
+
+// error can't set headers after they are sent. express
+Lỗi này thường là do xử lý bất đồng bộ (asynchronous) không đúng dẫn đến tình trạng response.send({}) (hoặc cái nào tương tự thế) bị gọi 2 lần.
+Cách khắc phục đơn giản là dùng return sau mỗi hàm res.send hoặc res.json...
+Hy vọng sẽ giúp được cho bạn :)
