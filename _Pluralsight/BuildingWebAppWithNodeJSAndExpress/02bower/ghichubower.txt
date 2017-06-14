@@ -1,0 +1,11 @@
+1. https://bower.io/
+npm install -g bower
+bower
+bower init
+bower install --save bootstap
+bower install font-awesome --save
+
+2. new file .bowerrc . And this is where Bower's going to look for its configuration information
+{
+	"directory": "public/lib"
+}

@@ -1,0 +1,7 @@
+* modules:
+body-parser
+cookie-parser
+passport
+express-session
+passport-local
+

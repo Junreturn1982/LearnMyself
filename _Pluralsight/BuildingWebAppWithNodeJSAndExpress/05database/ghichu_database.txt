@@ -1,0 +1,23 @@
+// https://stackoverflow.com/questions/2404742/how-to-install-mongodb-on-windows install mongoDB
+// cd to C:\Program Files\MongoDB\Server\3.2\bin>
+// Server Create the following folder C:\data\db
+mongod
+// or
+mongod --port 27017 --dbpath C:\MongoDB\data\db
+mongod --dbpath C:\MongoDB\data\db
+// Client
+show dbs // hien thi database
+use local
+// collections = table, document = record
+show collections
+db.createCollection('test')
+db.test.find()
+db.test.insert({ name: "Hoang", age: 35})
+db.test.update({name: "Hoang"}, {age: 28})
+db.test.update({name: "Hoang"}, {$set: {age: 28}})
+db.test.remove({age: 28})
+db.test.remove({}) // remove all
+// robomongo ide
+
+https://www.npmjs.com/
+
