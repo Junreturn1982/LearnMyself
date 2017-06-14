@@ -37,6 +37,12 @@ const router = (val) => {
     });
     
     authRouter.route('/profile')
+    .all((req, res, next) => {
+        if (!req.user) {
+            res.redirect('/');
+        }
+        next();
+    })
     .get((req, res) => {
         res.json(req.user);
     });
