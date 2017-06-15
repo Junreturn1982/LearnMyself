@@ -6,3 +6,8 @@ npm install jshint
 npm install jscs
 3. gulp
 npm install gulp --save-dev
+// .jscsrc remove the lines
+"validateJSDoc": {
+        "checkParamNames": true,
+        "requireParamTypes": true
+    },
