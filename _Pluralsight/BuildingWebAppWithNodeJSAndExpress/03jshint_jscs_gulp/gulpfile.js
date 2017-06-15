@@ -18,6 +18,13 @@ gulp.task('style', () => {
 
 gulp.task('wiredep', () => {
     let wiredep = require('wiredep').stream;
+    let inject = require('gulp-inject');
+
+    let injectSrc = gulp.src(['./public/css/*.css',
+                            './public/js/*.js'], {read: false});
+    let injectOptions = {
+        ignorePath: '/public'
+    };
     let options = {
         bowerJson: require('./bower.json'),
         directory: './public/lib',
@@ -27,5 +34,6 @@ gulp.task('wiredep', () => {
     return gulp
         .src('./src/views/*.html')
         .pipe(wiredep(options))
+        .pipe(inject(injectSrc, injectOptions))
         .pipe(gulp.dest('./src/views'));
 });
