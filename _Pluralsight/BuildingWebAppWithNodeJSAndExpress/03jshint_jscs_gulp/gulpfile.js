@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const jshint = require('gulp-jshint');
 const jscs = require('gulp-jscs');
+const nodemon = require('gulp-nodemon');
 
 const $ = require('gulp-load-plugins')({lazy: true});
 
@@ -36,4 +37,19 @@ gulp.task('wiredep', () => {
         .pipe(wiredep(options))
         .pipe(inject(injectSrc, injectOptions))
         .pipe(gulp.dest('./src/views'));
+});
+
+gulp.task('serve', ['style', 'wiredep'], () => {
+    let options = {
+        script: 'app.js',
+        delayTime: 1,
+        env: {
+            'PORT': 3000
+        },
+        watch:jsFiles
+    };
+    return nodemon(options)
+        .on('restart', (ev) => {
+            console.log('Restarting...');
+        });
 });
